@@ -27,9 +27,20 @@ router.post('/places', (req, res) => {
 router.get('/places', (req, res) => {
 
     if(!req.query.name){
-        return res.status(400).send('parámetro url faltante : name'); 
+        
+        //return res.status(400).send('parámetro url faltante : name'); 
+        
+        //return query by all places
+        PlacesModel.find()        
+        .then(doc => {
+            res.json(doc)
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        })
     }
 
+    //return one query  of place by name
     PlacesModel.findOne({
         name: req.query.name
     })
@@ -40,19 +51,6 @@ router.get('/places', (req, res) => {
         res.status(500).json(err);
     })
 });
-/*
-router.get((req, res) => {
-    
-    PlacesModel.find({
-        name: req.query
-    })
-    .then(doc => {
-        res.json(doc)
-    })
-    .catch(err => {
-        res.status(500).json(err);
-    })
-});*/
 
 //UPDATE
 router.put('/places', (req, res) => {

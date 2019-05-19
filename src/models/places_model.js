@@ -21,4 +21,4 @@ let PlaceSchema = new mongoose.Schema({
     visit: Number
 });
 
-module.exports = mongoose.model('Places',PlaceSchema);
+module.exports = mongoose.model('Places', PlaceSchema);
